@@ -1,0 +1,80 @@
+# .github/workflows/react-native-ci.yml
+name: React Native CI/CD
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Use Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18.x'
+    
+    - name: Install Dependencies
+      run: |
+        npm ci
+    
+    - name: Run Linter
+      run: |
+        npm run lint
+    
+    - name: Run Tests
+      run: |
+        npm test
+
+  android-build:
+    needs: lint-and-test
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up JDK
+      uses: actions/setup-java@v3
+      with:
+        java-version: '11'
+        distribution: 'adopt'
+    
+    - name: Install Dependencies
+      run: |
+        npm ci
+    
+    - name: Build Android APK
+      run: |
+        cd android
+        ./gradlew assembleRelease
+    
+    - name: Upload APK
+      uses: actions/upload-artifact@v3
+      with:
+        name: app-release
+        path: android/app/build/outputs/apk/release/
+
+  ios-build:
+    needs: lint-and-test
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Install Dependencies
+      run: |
+        npm ci
+        cd ios
+        pod install
+    
+    - name: Build iOS
+      run: |
+        cd ios
+        xcodebuild -scheme BlockhouseAuth -configuration Release clean archive
+    
+    - name: Upload IPA
+      uses: actions/upload-artifact@v3
+      with:
+        name: app-release-ipa
+        path: ios/build/BlockhouseAuth.ipa

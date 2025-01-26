@@ -1,0 +1,76 @@
+# Blockhouse Authentication App
+
+## Project Overview
+A React Native authentication app with login, signup, and home screens, featuring Redux state management and CI/CD pipeline.
+
+## Prerequisites
+- Node.js (v18+)
+- React Native CLI
+- Xcode (for iOS development)
+- Android Studio (for Android development)
+
+## Setup Instructions
+
+### 1. Clone the Repository
+```bash
+git clone https://github.com/yourusername/BlockhouseAuth.git
+cd BlockhouseAuth
+```
+
+### 2. Install Dependencies
+```bash
+npm install
+```
+
+### 3. iOS Setup (macOS only)
+```bash
+cd ios
+pod install
+cd ..
+```
+
+### 4. Run the Application
+
+#### For iOS
+```bash
+npx react-native run-ios
+```
+
+#### For Android
+```bash
+npx react-native run-android
+```
+
+## Project Structure
+- `src/`
+  - `screens/`: Authentication and home screens
+  - `navigation/`: App navigation setup
+  - `redux/`: State management slices and store
+- `.github/workflows/`: CI/CD GitHub Actions configuration
+
+## Available Scripts
+- `npm run lint`: Run ESLint
+- `npm test`: Run Jest tests
+- `npm start`: Start Metro bundler
+- `npm run android`: Run app on Android
+- `npm run ios`: Run app on iOS
+
+## CI/CD Pipeline
+The GitHub Actions workflow handles:
+- Linting checks
+- Running tests
+- Building Android APK
+- Building iOS IPA
+- Artifact uploads
+
+## Test Credentials
+- Email: test@example.com
+- Password: password123
+
+## Technologies Used
+- React Native
+- Redux Toolkit
+- React Navigation
+- Formik
+- Yup
+- GitHub Actions
