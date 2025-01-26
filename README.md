@@ -1,97 +1,96 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# Blockhouse React Native Authentication App
 
-# Getting Started
+## Project Overview
+This React Native application provides a secure authentication system with login, signup, and home screens. The app utilizes Redux for state management and includes a comprehensive CI/CD pipeline.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+## Key Features
+- **Authentication**: Users can sign up with email and password, and log in to the app.
+- **State Management**: App state, including authentication status and user data, is managed using Redux Toolkit.
+- **Navigation**: Navigation implemented with React Navigation, with screens for Login, Signup, and Home.
+- **CI/CD Pipeline**: GitHub Actions workflow for linting, testing, and building Android/iOS versions.
 
-## Step 1: Start Metro
+## Prerequisites
+- Node.js (v18+)
+- React Native CLI
+- Xcode (for iOS) 
+- Android Studio (for Android)
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+## Setup Instructions
+1. Clone the repository:
+   
+   - git clone https://github.com/your-username/BlockhouseAuth.git
+   - cd BlockhouseAuth
+   
+2. Install dependencies:
+   
+   - npm install
+   
+3. iOS setup (macOS):
+   
+   - cd ios
+   - pod install
+   - cd ..
+   
+4. Run the app:
+   - iOS: `npx react-native run-ios`
+   - Android: `npx react-native run-android`
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+## Project Structure
+- `src/`
+  - `screens/`: Contains the authentication (Login, Signup) and Home screens
+  - `navigation/`: Handles the app navigation setup using React Navigation
+  - `redux/`: Includes the Redux state management slices and store configuration
+  - `theme/`: Defines the app-wide theme and global styles
 
-```sh
-# Using npm
-npm start
+- `.github/workflows/`: Contains the GitHub Actions CI/CD configuration
 
-# OR using Yarn
-yarn start
-```
+The key files and their responsibilities are:
 
-## Step 2: Build and run your app
+- `src/screens/LoginScreen.js`: Implements the login functionality, including form handling and navigation.
+- `src/screens/SignupScreen.js`: Handles the user signup process, with form validation and state management.
+- `src/screens/HomeScreen.js`: Displays the main app interface after successful authentication, including the user email and logout functionality.
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
+- `src/navigation/AppNavigator.js`: Sets up the navigation structure of the app, including the header customization.
 
-### Android
+- `src/redux/authSlice.js`: Defines the Redux slice for handling authentication-related state and actions.
+- `src/redux/store.js`: Configures the Redux store with the authentication reducer.
 
-```sh
-# Using npm
-npm run android
+- `src/theme/index.js`: Centralizes the app's theme and color palette.
+- `src/theme/globalStyles.js`: Provides the reusable styles used across the app.
 
-# OR using Yarn
-yarn android
-```
+- `.github/workflows/react-native-ci.yml`: Contains the GitHub Actions workflow for linting, testing, and building the Android and iOS versions of the app.
 
-### iOS
+## Available Scripts
+- `npm run lint`: Run ESLint
+- `npm test`: Run Jest tests
+- `npm start`: Start Metro bundler
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
+## CI/CD Pipeline
+GitHub Actions workflow:
+- Linting checks
+- Running tests
+- Building Android APK
+- Building iOS IPA
+- Uploading build artifacts
 
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
+## Test Credentials
+- Email: `test@example.com` 
+- Password: `password123`
 
-```sh
-bundle install
-```
+## Technologies Used
+- React Native
+- Redux Toolkit
+- React Navigation
+- Formik
+- Yup
+- GitHub Actions
+- Android Studio (for Android development)
+- Xcode (for iOS development)
 
-Then, and every time you update your native dependencies, run:
-
-```sh
-bundle exec pod install
-```
-
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
-
-```sh
-# Using npm
-npm run ios
-
-# OR using Yarn
-yarn ios
-```
-
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
-
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
-
-## Step 3: Modify your app
-
-Now that you have successfully run the app, let's make changes!
-
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
-
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
-
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+## Limitations & Future Improvements
+- Currently uses a mock authentication system (no real backend)
+- Improvements that can be made:
+  - Implement secure server-side authentication
+  - Add password reset functionality
+  - Enhance error handling and user feedback
+  - Improve testing coverage
