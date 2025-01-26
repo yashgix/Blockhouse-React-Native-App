@@ -1,4 +1,5 @@
 // __tests__/Login.test.js
+
 import React from 'react';
 import { render, fireEvent, waitFor } from '@testing-library/react-native';
 import { Provider } from 'react-redux';
@@ -6,61 +7,64 @@ import { store } from '../src/redux/store';
 import LoginScreen from '../src/screens/LoginScreen';
 
 describe('LoginScreen', () => {
-  const mockNavigation = {
-    replace: jest.fn(),
-    navigate: jest.fn()
-  };
+ const mockNavigation = {
+   replace: jest.fn(),
+   navigate: jest.fn()
+ };
 
-  it('renders login screen correctly', () => {
-    const { getByPlaceholderText, getByText } = render(
-      <Provider store={store}>
-        <LoginScreen navigation={mockNavigation} />
-      </Provider>
-    );
+ // Test rendering of login screen
+ it('renders login screen correctly', () => {
+   const { getByPlaceholderText, getByText } = render(
+     <Provider store={store}>
+       <LoginScreen navigation={mockNavigation} />
+     </Provider>
+   );
 
-    expect(getByPlaceholderText('Email')).toBeTruthy();
-    expect(getByPlaceholderText('Password')).toBeTruthy();
-    expect(getByText('Login')).toBeTruthy();
-  });
+   expect(getByPlaceholderText('Email')).toBeTruthy();
+   expect(getByPlaceholderText('Password')).toBeTruthy();
+   expect(getByText('Login')).toBeTruthy();
+ });
 
-  it('shows validation errors for invalid input', async () => {
-    const { getByText, getByPlaceholderText } = render(
-      <Provider store={store}>
-        <LoginScreen navigation={mockNavigation} />
-      </Provider>
-    );
+ // Test validation errors for invalid input 
+ it('shows validation errors for invalid input', async () => {
+   const { getByText, getByPlaceholderText } = render(
+     <Provider store={store}>
+       <LoginScreen navigation={mockNavigation} />
+     </Provider>
+   );
 
-    const emailInput = getByPlaceholderText('Email');
-    const passwordInput = getByPlaceholderText('Password');
-    const loginButton = getByText('Login');
+   const emailInput = getByPlaceholderText('Email');
+   const passwordInput = getByPlaceholderText('Password');
+   const loginButton = getByText('Login');
 
-    fireEvent.changeText(emailInput, 'invalid-email');
-    fireEvent.changeText(passwordInput, '123');
-    fireEvent.press(loginButton);
+   fireEvent.changeText(emailInput, 'invalid-email');
+   fireEvent.changeText(passwordInput, '123');
+   fireEvent.press(loginButton);
 
-    await waitFor(() => {
-      expect(getByText('Invalid email')).toBeTruthy();
-      expect(getByText('Password must be at least 8 characters')).toBeTruthy();
-    });
-  });
+   await waitFor(() => {
+     expect(getByText('Invalid email')).toBeTruthy();
+     expect(getByText('Password must be at least 8 characters')).toBeTruthy();
+   });
+ });
 
-  it('navigates to home screen on successful login', async () => {
-    const { getByPlaceholderText, getByText } = render(
-      <Provider store={store}>
-        <LoginScreen navigation={mockNavigation} />
-      </Provider>
-    );
+ // Test navigation to home screen on successful login
+ it('navigates to home screen on successful login', async () => {
+   const { getByPlaceholderText, getByText } = render(
+     <Provider store={store}>
+       <LoginScreen navigation={mockNavigation} />
+     </Provider>
+   );
 
-    const emailInput = getByPlaceholderText('Email');
-    const passwordInput = getByPlaceholderText('Password');
-    const loginButton = getByText('Login');
+   const emailInput = getByPlaceholderText('Email');
+   const passwordInput = getByPlaceholderText('Password');
+   const loginButton = getByText('Login');
 
-    fireEvent.changeText(emailInput, 'test@example.com');
-    fireEvent.changeText(passwordInput, 'password123');
-    fireEvent.press(loginButton);
+   fireEvent.changeText(emailInput, 'test@example.com');
+   fireEvent.changeText(passwordInput, 'password123');
+   fireEvent.press(loginButton);
 
-    await waitFor(() => {
-      expect(mockNavigation.replace).toHaveBeenCalledWith('Home');
-    });
-  });
+   await waitFor(() => {
+     expect(mockNavigation.replace).toHaveBeenCalledWith('Home');
+   });
+ });
 });

@@ -1,5 +1,8 @@
 // src/theme/index.js
+
+// Export the Theme object which contains various theme-related properties
 export const Theme = {
+  //Color palette for the theme
   colors: {
     primary: '#FFA100',
     secondary: '#b7b7b7',
@@ -11,6 +14,8 @@ export const Theme = {
     headerBackground: '#FFFFFF',
     headerText: '#000000'
   },
+
+  // Typography properties for the theme
   typography: {
     fontFamily: 'System',
     sizes: {
@@ -23,6 +28,7 @@ export const Theme = {
       bold: '600'
     }
   },
+  // Spacing values for the theme
   spacing: {
     xs: 4,
     sm: 8,
@@ -30,6 +36,8 @@ export const Theme = {
     lg: 24,
     xl: 32
   },
+
+  // Styles for the header component
   header: {
     backgroundColor: '#FFFFFF',
     height: 56,
@@ -39,6 +47,8 @@ export const Theme = {
     paddingHorizontal: 16,
     width: '100%'
   },
+
+  // Styles for the header text
   headerText: {
     fontSize: 20,
     fontWeight: 'bold',
@@ -46,6 +56,8 @@ export const Theme = {
     marginLeft: 8,
     textAlign: 'center'
   },
+
+  // Styles for the header container
   headerContainer: {
     flexDirection: 'row',
     alignItems: 'center',
